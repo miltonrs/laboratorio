@@ -19,9 +19,9 @@ feriados[10][15] = "Proclamação da República.";
 feriados[11][25] = "Natal.";
 
 
-for (var i = 0; i < 12; i++) {
-	var mes = document.createElement("table");
-	//mes.setAttribute("border", "1");
+for (var numMes = 0; numMes < 12; numMes++) {
+	var table_mes = document.createElement("table");
+	//table_mes.setAttribute("border", "1");
 	
 	
 	var lnFeriados = document.createElement("tr");
@@ -29,62 +29,61 @@ for (var i = 0; i < 12; i++) {
 	listaFeriados.setAttribute("colspan", "7");
 	listaFeriados.setAttribute("class", "feriados");
 	
-	var cabecalho = document.createElement("tr");
 	
-	
-	var meses = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"];
+	var th_titulo_mess_meses = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"];
 	var dias = ["D", "S", "T", "Q", "Q", "S", "S"];
 	
 	
-	var lntitulo = document.createElement("tr");
+	var tr_cabecalho_titulo = document.createElement("tr");
 	
-	var titulo = document.createElement("th");
-	titulo.setAttribute("colspan", "7");
-	titulo.innerHTML = meses[i] + " - " + dataAtual.getFullYear();
+	var th_titulo_mes = document.createElement("th");
+	th_titulo_mes.setAttribute("colspan", "7");
+	th_titulo_mes.innerHTML = th_titulo_mess_meses[numMes] + " - " + dataAtual.getFullYear();
+	tr_cabecalho_titulo.appendChild(th_titulo_mes);
 	
-	lntitulo.appendChild(titulo);
+	var tr_cabecalho_dias_semana = document.createElement("tr");
 	
-	for (var c = 0; c < 7; c++) {
-		var s = document.createElement("th");
-		s.innerHTML = dias[c];
-		cabecalho.appendChild(s);
+	// Criando cabeçalho com as letras iniciais dos dias da semana
+	for (var numDiaSemana = 0; numDiaSemana < 7; numDiaSemana++) {
+		var th_dia_semana = document.createElement("th");
+		th_dia_semana.innerHTML = dias[numDiaSemana];
+		tr_cabecalho_dias_semana.appendChild(th_dia_semana);
 	}
 	
-	mes.appendChild(lntitulo);
-	mes.appendChild(cabecalho);
+	// Adicionando Cabecalhos
+	table_mes.appendChild(tr_cabecalho_titulo);
+	table_mes.appendChild(tr_cabecalho_dias_semana);
 	
-	var contador = 0;
-	
-	for (var j = 0, l = 0; j < 6; j++) {
-		var semana = document.createElement("tr");
+	for (var j = 0, numDia = 0; j < 6; j++) {
+		var tr_semana = document.createElement("tr");
 		for (var k = 0; k < 7; k++) {
-			var primeiroDia = new Date(dataAtual.getFullYear(), i, 1);
-			var ultimoDia = new Date(dataAtual.getFullYear(), i, 0);
+			var primeiroDia = new Date(dataAtual.getFullYear(), numMes, 1);
+			var ultimoDia = new Date(dataAtual.getFullYear(), numMes, 0);
 			
-			var dia = document.createElement("td");
+			var td_dia = document.createElement("td");
 			
 			if (j < 1 && k < primeiroDia.getDay()) {
-				dia.innerHTML = '';
+				td_dia.innerHTML = '';
 			} else {
-				l++;
-				if (l <= ultimoDia.getDate()) {
-					if (feriados[i][l].length > 0) {
-						listaFeriados.innerHTML += l + ' - ' + feriados[i][l] + ' ';
-						dia.setAttribute("class", "feriado");
+				numDia++;
+				if (numDia <= ultimoDia.getDate()) {
+					if (feriados[numMes][numDia].length > 0) {
+						listaFeriados.innerHTML += numDia + ' - ' + feriados[numMes][numDia] + ' ';
+						td_dia.setAttribute("class", "feriado");
 					}
-					dia.innerHTML = l;
+					td_dia.innerHTML = numDia;
 				}
 			}
 			
 			
-			semana.appendChild(dia);
+			tr_semana.appendChild(td_dia);
 		}
-		mes.appendChild(semana);
+		table_mes.appendChild(tr_semana);
 
 	}
 	lnFeriados.appendChild(listaFeriados);
-	mes.appendChild(lnFeriados);
-	calendario.appendChild(mes);
+	table_mes.appendChild(lnFeriados);
+	calendario.appendChild(table_mes);
 }
 
 window.onload = function() {
