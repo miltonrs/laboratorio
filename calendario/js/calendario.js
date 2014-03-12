@@ -25,7 +25,7 @@ function getCalendario (ano) {
 	for (var numMes = 1; numMes < 12; numMes++) {
 		var table_mes = document.createElement("table");
 		//table_mes.setAttribute("border", "1");
-				
+
 		var lnFeriados = document.createElement ("tr");
 		var listaFeriados = document.createElement("td");
 		listaFeriados.setAttribute ("colspan", "7");
