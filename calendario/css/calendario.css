@@ -1,0 +1,6 @@
+.tabela_mes {border: solid 1px gray; text-align: center; display: inline-table; margin: 10px; width: 210px}
+.tabela_mes tr th {width: 20px; padding: 5px;}
+.calendario {margin: 0 auto; text-align: center}
+.feriados {color: white; font-weight: bold; background: green}
+.lista_feriados {font-size: 10px; color: green}
+.th_titulo_mes {background: black; color: white}
