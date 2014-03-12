@@ -1,35 +1,17 @@
-function getFeriados () {
-	var feriados = new Array();
-	for (var i = 0; i < 12; i++) {
-		feriados[i] = new Array();
-		for (var j = 1; j < 32; j++) {
-			feriados[i][j] = new Array();
-		}
-	}
-	/*feriados[1][1] = "Confraternização Universal.";
-	feriados[11][2] = "Finados.";
-	feriados[4][21] = "Tiradentes.";
-	feriados[5][1] = "Dia do trabalho.";
-	feriados[9][7] = "Independência do Brasil.";
-	feriados[10][12] = "Nossa Sra. Aparecida.";
-	feriados[11][15] = "Proclamação da República.";
-	feriados[12][25] = "Natal.";*/
-	return feriados;
-}
+function getCalendario (ano, feriados) {
 
-function getCalendario (ano) {
 	var data = new Date (ano, 0, 1);
 	var calendario = document.createElement ("div");
 	var feriados = getFeriados ();
 	
 	for (var numMes = 0; numMes < 12; numMes++) {
 		var table_mes = document.createElement("table");
-		//table_mes.setAttribute("border", "1");
+		table_mes.setAttribute("class", "tabela_mes");
 
 		var lnFeriados = document.createElement ("tr");
 		var listaFeriados = document.createElement("td");
 		listaFeriados.setAttribute ("colspan", "7");
-		listaFeriados.setAttribute ("class", "feriados");
+		listaFeriados.setAttribute ("class", "lista_feriados");
 		
 		var th_titulo_mess_meses = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"];
 		var dias = ["D", "S", "T", "Q", "Q", "S", "S"];
@@ -38,6 +20,7 @@ function getCalendario (ano) {
 		
 		var th_titulo_mes = document.createElement("th");
 		th_titulo_mes.setAttribute("colspan", "7");
+		th_titulo_mes.setAttribute("class", "th_titulo_mes");
 		th_titulo_mes.innerHTML = th_titulo_mess_meses[numMes] + " - " + data.getFullYear();
 		tr_cabecalho_titulo.appendChild(th_titulo_mes);
 		
@@ -69,7 +52,7 @@ function getCalendario (ano) {
 					if (numDia <= ultimoDia.getDate()) {
 						if (feriados[numMes][numDia].length > 0) {
 							listaFeriados.innerHTML += numDia + ' - ' + feriados[numMes][numDia] + ' ';
-							td_dia.setAttribute("class", "feriado");
+							td_dia.setAttribute("class", "feriados");
 						}
 						td_dia.innerHTML = numDia;
 					}
@@ -84,7 +67,26 @@ function getCalendario (ano) {
 	}
 	return calendario;
 }
+function getFeriados () {
+	var feriados = new Array();
+	for (var i = 0; i < 12; i++) {
+		feriados[i] = new Array();
+		for (var j = 1; j < 32; j++) {
+			feriados[i][j] = new Array();
+		}
+	}
+	feriados[0][1] = "Confraternização Universal.";
+	feriados[10][2] = "Finados.";
+	feriados[3][21] = "Tiradentes.";
+	feriados[4][1] = "Dia do trabalho.";
+	feriados[8][7] = "Independência do Brasil.";
+	feriados[9][12] = "Nossa Sra. Aparecida.";
+	feriados[10][15] = "Proclamação da República.";
+	feriados[11][25] = "Natal.";
+	return feriados;
+}
 window.onload = function() {
 	calendario = getCalendario(2014);
+	calendario.setAttribute("class", "calendario");
 	document.body.appendChild(calendario);
 }
