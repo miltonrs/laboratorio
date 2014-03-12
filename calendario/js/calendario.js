@@ -58,7 +58,7 @@ function getCalendario (ano) {
 			var tr_semana = document.createElement("tr");
 			for (var k = 0; k < 7; k++) {
 				var primeiroDia = new Date(data.getFullYear(), numMes, 1);
-				var ultimoDia = new Date(data.getFullYear(), numMes, 0);
+				var ultimoDia = new Date(data.getFullYear(), numMes + 1, 0);
 				
 				var td_dia = document.createElement("td");
 				
